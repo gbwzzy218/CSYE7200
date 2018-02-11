@@ -72,13 +72,13 @@ class FunctionSpec extends FlatSpec with Matchers{
   it should "work" in
   {
     val a:Int => Int => String = {a => b=> "abcde".substring(a, b)}
-    
+
     Try(a(0)(2)) should matchPattern{
       case Success("ab") =>
     }
-    
+
     val aux = Function.invert2(a)
-    
+
     Try(aux(0)(2)) should matchPattern{
       case Failure(_) =>
     }
@@ -87,13 +87,13 @@ class FunctionSpec extends FlatSpec with Matchers{
   behavior of "invert3"
 
   it should "work" in {
-    
+
     val a:Int => Int=> Int=> Int = {a => b=> c=> a*b+c}
-    
+
     a(2)(3)(4) shouldBe 10
-    
+
     val aux = Function.invert3(a)
-    
+
     aux(2)(3)(4) shouldBe 14
   }
 
@@ -110,7 +110,7 @@ class FunctionSpec extends FlatSpec with Matchers{
 
   behavior of "uncurried2"
     it should "work" in{
-     
+
       def a:Int => Int=> Int=> Int = {a => b=> c=> a*b+c}
 
       def aux = Function.uncurried2(a)
